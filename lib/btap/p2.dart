@@ -63,7 +63,7 @@ class _PrimeState extends State<Prime> {
           TextField(
             controller: numberValue,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Nhập số để kiểm tra',
               border: OutlineInputBorder(),
             ),
@@ -71,13 +71,13 @@ class _PrimeState extends State<Prime> {
 
           ElevatedButton(
             onPressed: ResultPrimeNumber,
-            child: Text(
+            child: const Text(
               'Check'
             ),
           ),
           Text(
             result,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.red
