@@ -60,6 +60,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Product> pr = context.read<ProductModel>()._products;
     return Placeholder(
       child: Container(
         color: Color.fromARGB(255, 236, 212, 212),
@@ -70,58 +71,92 @@ class HomePage extends StatelessWidget {
               crossAxisCount: 2),
           itemBuilder: (BuildContext context, int index) {
             return Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    image: const DecorationImage(
-                        image: AssetImage('assets/images/nike.png'),
-                        fit: BoxFit.cover)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(172, 0, 0, 0),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30))),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.favorite_outline_sharp),
-                            color: primaryColor,
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) {
-                                  return DetailScreen();
-                                },
-                              ));
-                            },
-                            child: Text(
-                              'SP',
+              padding: const EdgeInsets.all(6.0),
+              child: GestureDetector(
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      image: DecorationImage(
+                          image: AssetImage(pr[index].image),
+                          fit: BoxFit.cover)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(172, 0, 0, 0),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(30),
+                                bottomRight: Radius.circular(30))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.favorite_outline_sharp),
+                              color: primaryColor,
+                            ),
+                            Text(
+                              pr[index].ten,
                               style: TextStyle(color: Colors.white),
                             ),
-                            style: ButtonStyle(),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              final counter = context.read<ProductModel>();
+                            IconButton(
+                              onPressed: () {
+                                final counter = context.read<ProductModel>();
 
-                              counter.incrementCounter();
-                            },
-                            icon: const Icon(Icons.shopping_cart),
-                            color: primaryColor,
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                                counter.incrementCounter();
+                              },
+                              icon: const Icon(Icons.shopping_cart),
+                              color: primaryColor,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return Scaffold(
+                        body: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: [
+                              Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(pr[index].image),
+                                            fit: BoxFit.cover)),
+                                  )),
+                              Expanded(
+                                  child: Center(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      pr[index].price,
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(pr[index].mota,
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15))
+                                  ],
+                                ),
+                              ))
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ));
+                },
               ),
             );
           },
@@ -136,7 +171,7 @@ class Product {
   String ten;
   String image;
   String mota;
-  double price;
+  String price;
   Product(
       {required this.id,
       required this.ten,
@@ -159,26 +194,26 @@ class ProductModel extends ChangeNotifier {
         id: 1,
         ten: 'Sản phẩm 1',
         image: 'assets/images/nike.png',
-        mota: 'SP1',
-        price: 100000),
+        mota: 'E phọc oăn',
+        price: '\$100000'),
     Product(
         id: 2,
         ten: 'Sản phẩm 2',
         image: 'assets/images/nike1.png',
-        mota: 'SP2',
-        price: 200000),
+        mota: 'E phọc tu',
+        price: '\$200000'),
     Product(
         id: 3,
         ten: 'Sản phẩm 3',
         image: 'assets/images/nike2.png',
-        mota: 'SP3',
-        price: 300000),
+        mota: 'E phọc tờ ruy',
+        price: '\$300000'),
     Product(
         id: 4,
         ten: 'Sản phẩm 4',
-        image: 'assets/images/products/nike3.png',
-        mota: 'SP4',
-        price: 400000),
+        image: 'assets/images/nike3.png',
+        mota: 'E phọc pho',
+        price: '\$400000'),
   ];
   List get products => _products;
 
@@ -191,36 +226,4 @@ class ProductModel extends ChangeNotifier {
   int get counter => _counter;
 
   // get productItems => _productItems;
-}
-
-class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/af1.png'))),
-                ),
-                Text(
-                  '92.65',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Text('This is demo product')
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
 }
