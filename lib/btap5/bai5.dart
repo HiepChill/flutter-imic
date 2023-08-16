@@ -14,33 +14,36 @@ class Product {
   String mota;
   double price;
   Product(
-      {required this.ten,
+    {
+      required this.ten,
       required this.image,
       required this.mota,
-      required this.price});
+      required this.price
+    });
 }
 
-final List<Product> products = [
-  Product(
-      ten: 'Sản phẩm 1',
-      image: 'assets/images/products/img_product_1.jpg',
-      mota: 'SP1',
-      price: 100000),
-  Product(
-      ten: 'Sản phẩm 2',
-      image: 'assets/images/products/img_product_2.png',
-      mota: 'SP2',
-      price: 200000),
-  Product(
-      ten: 'Sản phẩm 3',
-      image: 'assets/images/products/img_product_3.jpg',
-      mota: 'SP3',
-      price: 300000),
-  Product(
-      ten: 'Sản phẩm 4',
-      image: 'assets/images/products/img_product_4.jpg',
-      mota: 'SP4',
-      price: 400000),
+final List<Product>
+  products = [
+    Product(
+        ten: 'Sản phẩm 1',
+        image: 'assets/images/products/img_product_1.jpg',
+        mota: 'SP1',
+        price: 100000),
+    Product(
+        ten: 'Sản phẩm 2',
+        image: 'assets/images/products/img_product_2.png',
+        mota: 'SP2',
+        price: 200000),
+    Product(
+        ten: 'Sản phẩm 3',
+        image: 'assets/images/products/img_product_3.jpg',
+        mota: 'SP3',
+        price: 300000),
+    Product(
+        ten: 'Sản phẩm 4',
+        image: 'assets/images/products/img_product_4.jpg',
+        mota: 'SP4',
+        price: 400000),
   // Product('Sản phẩm 1', 'assets/images/products/img_product_1.jpg', 'SP1',
   //     100000),
   // Product('Sản phẩm 2', 'assets/images/products/img_product_2.png', 'SP2',

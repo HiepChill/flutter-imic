@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login',
-      home: Scaffold(
-        body: LoginForm()
-      ),
+      home: Scaffold(body: LoginForm()),
     );
   }
 }
@@ -28,10 +26,10 @@ class LoginForm extends StatefulWidget {
 }
 
 class _HomePageState extends State<LoginForm> {
-  var _loginCheck = true; 
+  var _loginCheck = true;
   var _signupCheck = false;
 
-  void _switch2 () {
+  void _switch2() {
     if (_signupCheck) {
       setState(() {
         _signupCheck = false;
@@ -43,7 +41,7 @@ class _HomePageState extends State<LoginForm> {
     }
   }
 
-  void _switch1 () {
+  void _switch1() {
     if (_loginCheck) {
       setState(() {
         _loginCheck = false;
@@ -62,16 +60,13 @@ class _HomePageState extends State<LoginForm> {
     return Material(
       child: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
               Color.fromARGB(239, 236, 67, 124),
               Color.fromARGB(255, 224, 181, 115),
-            ]
-          )
-        ),
-
+            ])),
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Center(
@@ -82,27 +77,22 @@ class _HomePageState extends State<LoginForm> {
                   alignment: Alignment.center,
                   angle: -math.pi / 50,
                   child: Container(
-                    width: 370,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.red[900],
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20)
-                      )
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'MyShop',
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white
+                      width: 370,
+                      height: 70,
+                      decoration: BoxDecoration(
+                          color: Colors.red[900],
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20))),
+                      child: const Center(
+                        child: Text(
+                          'MyShop',
+                          style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
-                      ),
-                    )
-                  ),
+                      )),
                 ),
-
                 Form(
                   key: _formKey,
                   child: Container(
@@ -118,85 +108,72 @@ class _HomePageState extends State<LoginForm> {
                     ),
                     child: Column(
                       children: [
-                        
                         TextFormField(
-                          autofocus: true,
-                          decoration: const InputDecoration(
-                            hintText: 'E-Mail',
-                          ),
+                            autofocus: true,
+                            decoration: const InputDecoration(
+                              hintText: 'E-Mail',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Vui lòng điền thông tin!';
+                              }
+                              return null;
+                            }),
+                        TextFormField(
+                          decoration:
+                              const InputDecoration(hintText: 'Password'),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Vui lòng điền thông tin!';
+                              return 'Vui lòng điền mật khẩu';
                             }
                             return null;
-                          }
-                        ),
-
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'Password'
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Vui lòng điền mật khẩu';
-                            } 
-                            return null;
                           },
                         ),
-
                         if (_signupCheck)
                           TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'Confirm Password'
+                            decoration: const InputDecoration(
+                                hintText: 'Confirm Password'),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Vui lòng điền mật khẩu';
+                              }
+                              return null;
+                            },
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Vui lòng điền mật khẩu';
-                            } 
-                            return null;
-                          },
-                        ),
-
                         if (_loginCheck)
                           Padding(
                             padding: const EdgeInsets.only(top: 40),
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: _priorityColor,
-                              ),
-                              child: const Text(
-                              'LOGIN'
-                              ),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Processing Data')),
-                                  );
-                                }
-                              } 
-                            ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _priorityColor,
+                                ),
+                                child: const Text('LOGIN'),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Processing Data')),
+                                    );
+                                  }
+                                }),
                           ),
-
                         if (_signupCheck)
                           Padding(
                             padding: const EdgeInsets.only(top: 40),
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: _priorityColor,
-                              ),
-                              child: const Text(
-                              'SIGN UP'
-                              ),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Processing Data')),
-                                  );
-                                }
-                              } 
-                            ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _priorityColor,
+                                ),
+                                child: const Text('SIGN UP'),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text('Processing Data')),
+                                    );
+                                  }
+                                }),
                           ),
-
                         if (_loginCheck)
                           Padding(
                             padding: const EdgeInsets.all(15),
@@ -214,7 +191,6 @@ class _HomePageState extends State<LoginForm> {
                               },
                             ),
                           ),
-
                         if (_signupCheck)
                           Padding(
                             padding: const EdgeInsets.all(15),
